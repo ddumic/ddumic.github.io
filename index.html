@@ -1,10 +1,135 @@
-<!DOCTYPE html>
+<!Doctype html>
 <html>
-  <head>
-    <title>It works!</title>
-  </head>
-  
-  <body>
-    <h1>It works!</h1>
-  </body>
+<head>
+	<title>Mijin Adventski Kalendar</title>
+	
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</head>
+
+<body id="body">
+
+
+</body>
+
+<style>
+.flip-card {
+  background-color: transparent;
+  width: 300px;
+  height: 200px;
+  border: 1px solid #f1f1f1;
+  perspective: 1000px; /* Remove this if you don't want the 3D effect */
+}
+
+/* This container is needed to position the front and back side */
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+/* Do an horizontal flip when you move the mouse over the flip box container */
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+/* Position the front and back side */
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden; /* Safari */
+  backface-visibility: hidden;
+}
+
+/* Style the front side (fallback if image is missing) */
+.flip-card-front {
+  background-color: #bbb;
+  color: black;
+}
+
+/* Style the back side */
+.flip-card-back {
+  background-color: dodgerblue;
+  color: white;
+  transform: rotateY(180deg);
+}
+</style>
+
+<script>
+
+$( document ).ready(function() {
+	var hints = [
+		"Opet zvone stara zvona" //kod zvona od vrata - kutija di su osiguraci
+		, "Tamo gdje ljubav pocinje" //u krevetu
+		, "Putevima vjetra" //di zapali cigaru
+		, "Bili cvitak" //kod kaktusa
+		, "U kancelariji" //wc
+		, "Nema vise ni pasje zime ni vrucine" //kod klime meni u sobi
+		, "Najdraza ti hrana a nikad nismo igrali" //pass the popcorn
+		, "U ormaru" //kod cipela u hodniku
+		, "Dolaze nam gosti nemoje biti bosi" //papucice iza vrata
+		, "Nemoj vadit jer mi se neda opet slagati" //u nadmadracu ispod kreveta
+		, "Bili su majstori, sad je kuhinja funkcionalna" //gornje ladice kuhinje
+		, "Ma, od tuda probusimo kuhinju ka od sale" //ostava
+		, "Gurni to tamo" //mijina soba
+		, "Uff dobro je, stalo je" //u kaucu u dnevnom
+		, "Kad vec nemamo krevet bar imas nocni ormaric" //u kutiji na kojoj stoji lampa u sobi
+		, "Kad me sisas?" //u kutiji mog brijaceg aparata
+		, "Imam milijun pari ali uvik koristim iste" //u torbi za carape
+		, "A ovoga ti bogami imas milijun al ti uvik malo" //u mijinoj torbi maloj u sobi
+		, "Ako moran idem tamo, al preferiram drugi" //mali wc
+		, "Neka mi to imamo pa taman ne koristili" //frizider
+		, "Di su skare" //stol u mijinoj sobi
+		, "Ovo je bia samo test, ja namjerno nisan tia micat" //na stolu u kuhinji
+		, "A ovu jadnu jabuku nismo godinama jeli" //apple kod mene u sobi
+		, "Pusti me dok je ne popijem" //di nam stoji kava
+	];
+
+	var $container = $("<div class='container'></div>");
+	var $counter = 1;
+
+	for(let row = 1; row <= 8; row++){
+		var $r = $("<div class='row'></div>");
+		
+		for(let column = 1; column <= 3; column++){
+			var $c = $("<div class='col-sm'></div>");
+			
+			var $card = $("<div class='flip-card'></div>");
+			var $containerInner = $("<div class='flip-card-inner'></div>");
+			
+			var $flip = $("<div class='flip-card-front'></div>");
+			var $text = $("<h1>"+$counter+"</h1>");
+			
+			var $flipBack = $("<div class='flip-card-back'></div>");
+			var $textBack = $("<h1>"+hints[$counter-1]+"</h1>");
+			
+			$counter++;
+			
+			$flip.append($text);
+			$flipBack.append($textBack);
+			
+			$containerInner.append($flip);
+			$containerInner.append($flipBack);
+			$card.append($containerInner);
+			
+			$c.append($card);
+			
+			$r.append($c);
+		}
+		
+		$container.append($r);
+	}
+	
+	$("body").append($container);
+});
+
+</script>
+
 </html>
